@@ -7,6 +7,13 @@ void main(){
       home: Scaffold(
         appBar: AppBar(title: Text("ListView Tutorial")),
         body: getListView(),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          tooltip: "You pressed floating button.",
+          onPressed: (){
+            debugPrint("You have pressed floatingButton.");
+          },
+        ),
       ),
     )
   );
@@ -28,14 +35,24 @@ Widget getListView(){
       trailing: Icon(Icons.phone),
       subtitle: Text("${litem[index]} is displayed"),
       onTap: (){
-        var alertDialog = AlertDialog(
-          title: Text("You pressed ${litem[index]}"),
-        );
-      showDialog(context: context,builder: (BuildContext context){
-        return alertDialog;
-      });
+       showSnackBar(context,"${litem[index]}");
         },
     );
   });
   return listV;
+}
+
+//For showing snackbar
+
+void showSnackBar(BuildContext context,String a){
+  var msg = SnackBar(
+    content: Text("You have pressed $a"),
+    action: SnackBarAction(
+      label: "UNDO",
+      onPressed: (){
+        debugPrint("You are pressed dummy Undo.");
+      },
+    ),
+  );
+  Scaffold.of(context).showSnackBar(msg);
 }
