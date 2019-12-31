@@ -1,71 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'dart:ui';
 
-void main(){
-  runApp(
-    MaterialApp(
-      title: "Statefull widget tutorial",
-      home: Scaffold(
-        appBar: AppBar(title: Text("Stateful widget tutorial"),),
-        body: favouriteCity(),
+void main() {
+  runApp(MaterialApp(
+    title: "Practice for Dropdown Menu",
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text("Dropdown Menu Practice"),
       ),
-    )
-  );
+      body: FavouriteName(),
+    ),
+  ));
 }
 
-//Step-1: create a class extended StatefulWidget
-
-class favouriteCity extends StatefulWidget{
+class FavouriteName extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _favouriteCityState();
+    return _favouriteNameState();
   }
-
 }
 
-//Step-02: Create a class extended State<above_class>
-class _favouriteCityState extends State<favouriteCity>{
-  var names = ["Shiv","Somvhu","Har","Mohadev","Rudro"];
-  var nameSelect = "Shiv";
-  String cityName = "";
+class _favouriteNameState extends State<FavouriteName> {
+  var favNamesVar = ["Shiv", "Somvhu", "Rudro", "Mohadev"];
+  var selectName = "Shiv";
+  Widget picWidget = ImageSeletion.getMohadevWidget();
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
-      child: Column(
-        children: <Widget>[
-          TextField(
-            textAlign: TextAlign.center,
-            onSubmitted: (String userInput){
-              //we can also use here onChanged: then the change will be instant
-              //Step-03: call the setState method and put the changing value
-              setState(() {
-                cityName = userInput;
-              });
-            },
-          ),
-          Padding(
-            child: Text("Your city name is: $cityName"),
-            padding: EdgeInsets.only(top: 8),
-          ),
-         //***************Dropdown code*********************
-         DropdownButton(
-           items: names.map((String dropDownItem){
-             return DropdownMenuItem<String>(
-               value: dropDownItem,
-               child: Text(dropDownItem),
-             );
-           }).toList(),
-           onChanged: (String newValueSelected){
-             setState(() {
-                nameSelect = newValueSelected;
-             });
-           },
-           value: nameSelect,
-         ),
-
-          //*****************Drop down code end*****************
-        ],
-      )
-    );
+        alignment: Alignment.center,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            picWidget,
+            DropdownButton<String>(
+              items: favNamesVar.map((String inputString) {
+                return DropdownMenuItem(
+                  value: inputString,
+                  child: Text(inputString),
+                );
+              }).toList(),
+              onChanged: (String userInput) {
+                setState(() {
+                  selectName = userInput;
+                  switch (selectName) {
+                    case 'Shiv':
+                      picWidget = ImageSeletion.getShivWidget();
+                      break;
+                    case 'Somvhu':
+                      picWidget = ImageSeletion.getSomvhuWidget();
+                      break;
+                    case 'Rudro':
+                      picWidget = ImageSeletion.getRudroWidget();
+                      break;
+                    default :
+                      picWidget = ImageSeletion.getMohadevWidget();
+                  }
+                });
+              },
+              value: selectName,
+            ),
+          ],
+        ));
   }
+}
+
+class ImageSeletion {
+  static AssetImage shiv = AssetImage('images/shiv.jpg');
+  static AssetImage mohadev = AssetImage('images/mohadev.jpg');
+  static AssetImage rudro = AssetImage('images/rudro.jpg');
+  static AssetImage somvhu = AssetImage('images/somvhu.jpg');
+
+  static Widget getShivWidget() =>
+      Container(child: Image(image: shiv, width: 200, height: 200));
+
+  static Widget getSomvhuWidget() =>
+      Container(child: Image(image: somvhu, width: 200, height: 200));
+
+  static Widget getMohadevWidget() =>
+      Container(child: Image(image: mohadev, width: 200, height: 200));
+
+  static Widget getRudroWidget() =>
+      Container(child: Image(image: rudro, width: 200, height: 200));
 }
