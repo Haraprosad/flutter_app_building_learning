@@ -6,11 +6,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-          padding: EdgeInsets.only(right: 8,left: 8),
+          padding: EdgeInsets.only(right: 8,left: 8,top: 24),
             alignment: Alignment.center,
             color: Colors.deepPurple,
-            child: Column(mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+            child: Column(children: <Widget>[
               Row(children: <Widget>[
                 Expanded(
                     child: Center(child: MyTextClass.getTextWidget1("Niloy"))),
@@ -20,7 +19,6 @@ class Home extends StatelessWidget {
                         MyTextClass.getTextWidget1("Do you want to go USA?")))
               ]
               ),
-              SizedBox(height: 16),//To create space between row1 and row2 widget
               Padding(padding: EdgeInsets.only(bottom: 16)),
               Row(children: <Widget>[
                 Expanded(
@@ -30,7 +28,9 @@ class Home extends StatelessWidget {
                         child:
                         MyTextClass.getTextWidget1("Do you want to go Canada?")))
               ]
-              )
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 16)),
+              myImageAsset()
             ],
             ))
 
@@ -51,7 +51,7 @@ class MyTextClass {
       style: TextStyle(
           decoration: TextDecoration.none,
           //default: underline
-          fontSize: 30.0,
+          fontSize: 25.0,
           //To modify font size
           fontFamily: 'Raleway',
           fontWeight: FontWeight.w700,
@@ -59,4 +59,14 @@ class MyTextClass {
           color: Colors.white),
     );
   }
+}
+
+class myImageAsset extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    AssetImage assetImage = AssetImage('images/plc.jpg');
+    Image image = Image(image: assetImage,);
+    return Container(child: image,);
+  }
+
 }
