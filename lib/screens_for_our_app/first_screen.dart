@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class FirstScreen extends StatelessWidget{
@@ -8,15 +10,21 @@ class FirstScreen extends StatelessWidget{
         color: Colors.lightBlueAccent,
         child:  Center(
             child: Text(
-              "Welcome to Flutter",
+              generateLuckyNumber(),
               textDirection: TextDirection.ltr,
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 45.0
+                  fontSize: 35.0
               ) ,
             )
         )
     );
+  }
+
+  String generateLuckyNumber(){
+    var rand = Random();
+    int luckyNumber = rand.nextInt(10);
+    return "Your lucky number: $luckyNumber";
   }
 
 }
