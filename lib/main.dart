@@ -24,7 +24,7 @@ class favouriteCity extends StatefulWidget{
 
 //Step-02: Create a class extended State<above_class>
 class _favouriteCityState extends State<favouriteCity>{
-  var names = ["Shiv","Somvhu","Har","Mohadev"];
+  var names = ["Shiv","Somvhu","Har","Mohadev","Rudro"];
   var nameSelect = "Shiv";
   String cityName = "";
   @override
