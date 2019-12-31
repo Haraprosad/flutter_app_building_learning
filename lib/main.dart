@@ -24,6 +24,8 @@ class favouriteCity extends StatefulWidget{
 
 //Step-02: Create a class extended State<above_class>
 class _favouriteCityState extends State<favouriteCity>{
+  var names = ["Shiv","Somvhu","Har","Mohadev"];
+  var nameSelect = "Shiv";
   String cityName = "";
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,23 @@ class _favouriteCityState extends State<favouriteCity>{
             child: Text("Your city name is: $cityName"),
             padding: EdgeInsets.only(top: 8),
           ),
+         //***************Dropdown code*********************
+         DropdownButton(
+           items: names.map((String dropDownItem){
+             return DropdownMenuItem<String>(
+               value: dropDownItem,
+               child: Text(dropDownItem),
+             );
+           }).toList(),
+           onChanged: (String newValueSelected){
+             setState(() {
+                nameSelect = newValueSelected;
+             });
+           },
+           value: nameSelect,
+         ),
+
+          //*****************Drop down code end*****************
         ],
       )
     );
