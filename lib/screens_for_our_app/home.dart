@@ -6,11 +6,16 @@ class Home extends StatelessWidget{
     return Center(child:  Container(
       alignment: Alignment.center,
       color: Colors.deepPurple,
-      padding: EdgeInsets.all(16),//To use margin/padding: EdgeInset is used
-      margin: EdgeInsets.only(top: 55,left: 35),
       child: Text(
         "Niloy",
         textDirection: TextDirection.ltr,
+        style: TextStyle(
+            decoration: TextDecoration.none,//default: underline
+            fontSize: 70.0,  //To modify font size
+            fontFamily:'Raleway',fontWeight: FontWeight.w700,
+            fontStyle: FontStyle.italic,
+            color:Colors.white
+        ),
       ),
     )
     );
